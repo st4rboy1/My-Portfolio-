@@ -10,16 +10,34 @@ import { useState } from 'react'
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the data to a backend
-    console.log('Form submitted:', formData)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({ name: '', email: '', message: '' })
-    }, 3000)
+    setSubmitted(false) // Reset submitted state on new submission attempt
+    setError(false) // Reset error state on new submission attempt
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        setFormData({ name: '', email: '', message: '' }) // Clear form on success
+        setTimeout(() => setSubmitted(false), 3000) // Hide success message after 3 seconds
+      } else {
+        setError(true)
+        console.error('Form submission failed:', response.statusText)
+      }
+    } catch (err) {
+      setError(true)
+      console.error('Error submitting form:', err)
+    }
   }
 
   const socialLinks = [
@@ -103,6 +121,11 @@ export function Contact() {
               >
                 {submitted ? 'Message Sent! ✨' : 'Send Message'}
               </motion.button>
+              {error && (
+                <p className="text-red-500 text-center mt-4">
+                  There was an error sending your message. Please try again later.
+                </p>
+              )}
             </motion.form>
           </ScrollReveal>
 
