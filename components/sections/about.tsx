@@ -76,6 +76,58 @@ export function About() {
             </div>
           </ScrollReveal>
         </motion.div>
+
+        {/* Tech Stack Section */}
+        <ScrollReveal delay={0.3}>
+          <div className="mt-20 md:mt-24">
+            <h3 className="text-2xl md:text-3xl font-bold mb-12 text-center">Technical Stack</h3>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
+              {[
+                {
+                  category: 'Languages',
+                  skills: ['PHP', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'SQL', 'Java', 'C#'],
+                },
+                {
+                  category: 'Backend',
+                  skills: ['Laravel 12', 'Inertia.js', 'MySQL', 'Redis'],
+                },
+                {
+                  category: 'Frontend',
+                  skills: ['React 18', 'Tailwind CSS', 'shadcn/ui', 'Radix UI'],
+                },
+                {
+                  category: 'DevOps & Tools',
+                  skills: ['Docker', 'GitHub Actions', 'Laravel Forge', 'Git', 'VS Code'],
+                },
+              ].map((stack, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="p-6 rounded-lg glass-morphism hover:bg-white/15 transition-all duration-300"
+                  whileHover={{ y: -5 }}
+                >
+                  <h4 className="text-lg font-semibold text-primary mb-4">{stack.category}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {stack.skills.map((skill, skillIndex) => (
+                      <span
+                        key={skillIndex}
+                        className="px-3 py-1 rounded-full text-xs bg-white/10 text-foreground font-medium hover:bg-white/20 transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   )
