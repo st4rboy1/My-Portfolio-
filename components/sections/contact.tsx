@@ -32,10 +32,12 @@ export function Contact() {
         setTimeout(() => setSubmitted(false), 3000) // Hide success message after 3 seconds
       } else {
         setError(true)
+        // eslint-disable-next-line no-console
         console.error('Form submission failed:', response.statusText)
       }
     } catch (err) {
       setError(true)
+      // eslint-disable-next-line no-console
       console.error('Error submitting form:', err)
     }
   }

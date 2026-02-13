@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 export async function POST(request: Request) {
   try {
     const formData = await request.json();
+    // eslint-disable-next-line no-console
     console.log('Received contact form data:', formData); // Keep for server-side logging
 
     // Create a Nodemailer transporter using your Gmail SMTP details
@@ -36,6 +37,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ message: 'Form data received and email sent successfully!' }, { status: 200 });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error processing contact form data or sending email:', error);
     return NextResponse.json({ message: 'Failed to process form data or send email.' }, { status: 500 });
   }
