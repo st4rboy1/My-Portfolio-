@@ -13,25 +13,18 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    title: 'Senior Full Stack Developer',
-    company: 'Tech Company Inc.',
-    period: '2022 - Present',
-    description: 'Led development of scalable web applications using React and Node.js. Mentored junior developers and established best practices.',
-    skills: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'AWS'],
+    title: 'Full Stack Developer - Capstone Project',
+    company: 'Christian Bible Heritage Learning Center',
+    period: 'Feb 2025 - Nov 2025',
+    description: 'Led development of core modules including billing, invoicing, and payment tracking for a web-based enrollment system. Built multi-role authorization system for 5 user types, implemented document management workflows, and created email notification system with 16 notification types. Contributed to CI/CD pipeline setup and wrote comprehensive tests using Pest PHP and Laravel Dusk.',
+    skills: ['Laravel 12', 'React 18', 'TypeScript', 'Tailwind CSS', 'MySQL', 'Docker', 'GitHub Actions'],
   },
   {
-    title: 'Full Stack Developer',
-    company: 'Digital Agency Co.',
-    period: '2020 - 2022',
-    description: 'Developed client websites and web applications. Collaborated with designers to implement pixel-perfect designs.',
-    skills: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'GraphQL'],
-  },
-  {
-    title: 'Frontend Developer',
-    company: 'Startup Labs',
-    period: '2018 - 2020',
-    description: 'Built responsive user interfaces and integrated APIs. Improved performance and user experience across all platforms.',
-    skills: ['JavaScript', 'React', 'CSS', 'HTML', 'Git'],
+    title: 'Junior Front-End Developer',
+    company: 'Smart Hyperion',
+    period: 'Jan 2021 - Dec 2022',
+    description: 'Assisted in end-to-end design, development, and deployment of web applications. Leveraged modern containerization and component-based architecture to deliver robust and scalable solutions with a focus on responsive design and user experience.',
+    skills: ['React', 'HTML', 'CSS', 'JavaScript'],
   },
 ]
 

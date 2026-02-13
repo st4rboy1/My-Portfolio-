@@ -44,16 +44,13 @@ export function About() {
           <ScrollReveal delay={0.1}>
             <div className="space-y-6">
               <motion.p variants={itemVariants} className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                I'm a passionate full-stack developer with 5+ years of experience building web applications. My journey started with a
-                curiosity about how things work, which led me to dive deep into web development.
+                I'm an IT student with hands-on full-stack development experience building production-grade web applications. As a primary contributor to a web-based enrollment system with 1,575+ commits, I've gained expertise in Laravel 12, React 18, and modern DevOps practices.
               </motion.p>
               <motion.p variants={itemVariants} className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                I specialize in creating responsive, user-friendly interfaces with a focus on performance and accessibility. I love
-                collaborating with teams to bring ideas to life and continuously learning new technologies.
+                I specialize in collaborative development workflows, automated testing, and continuous deployment. My experience spans multi-role authorization systems, document management, PDF generation, and building scalable backend solutions with modern frontend frameworks.
               </motion.p>
               <motion.p variants={itemVariants} className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                When I'm not coding, you'll find me exploring new design trends, contributing to open-source projects, or enjoying
-                the outdoors.
+                I'm passionate about building robust, maintainable code and creating seamless user experiences. I'm actively seeking OJT opportunities to further develop my technical skills in a professional environment.
               </motion.p>
             </div>
           </ScrollReveal>
@@ -61,10 +58,10 @@ export function About() {
           <ScrollReveal delay={0.2}>
             <div className="grid grid-cols-2 gap-4 md:gap-6">
               {[
-                { number: '5+', label: 'Years Experience' },
-                { number: '30+', label: 'Projects Completed' },
-                { number: '15+', label: 'Happy Clients' },
-                { number: '100%', label: 'Satisfaction Rate' },
+                { number: '1,575+', label: 'Commits' },
+                { number: '2', label: 'Work Experiences' },
+                { number: '8+', label: 'Technologies' },
+                { number: '4', label: 'Team Members' },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
