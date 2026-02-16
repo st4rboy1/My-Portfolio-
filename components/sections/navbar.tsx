@@ -47,7 +47,7 @@ export function Navbar({ activeSection }: NavbarProps) {
           className="text-xl md:text-2xl font-bold gradient-text"
           whileHover={{ scale: 1.05 }}
         >
-          Portfolio
+          Kyle Masangcay
         </motion.div>
 
         {/* Desktop Navigation */}
