@@ -26,9 +26,6 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="mb-6 md:mb-8"
         >
-          <div className="inline-block px-4 py-2 rounded-full glass-morphism text-sm md:text-base text-primary font-medium mb-6">
-            ✨ Welcome to My Portfolio
-          </div>
         </motion.div>
 
         <motion.h1
