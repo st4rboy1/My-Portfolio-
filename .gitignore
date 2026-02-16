@@ -10,3 +10,8 @@ node_modules/
 .next/
 .env*.local
 .DS_Store
+
+# Testing and coverage
+coverage/
+*.lcov
+.nyc_output/
