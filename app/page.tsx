@@ -6,7 +6,6 @@ import { Experience } from '@/components/sections/experience'
 import { Hero } from '@/components/sections/hero'
 import { Navbar } from '@/components/sections/navbar'
 import { Projects } from '@/components/sections/projects'
-import { TechStack } from '@/components/tech-stack'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
@@ -37,7 +36,6 @@ export default function Home() {
     <main className="overflow-x-hidden">
       <Navbar activeSection={activeSection} />
       <Hero />
-      <TechStack />
       <About />
       <Experience />
       <Projects />
