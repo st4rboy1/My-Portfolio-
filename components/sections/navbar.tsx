@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Moon, Sun } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
 
 interface NavbarProps {
   activeSection: string
@@ -18,6 +19,12 @@ const navItems = [
 export function Navbar({ activeSection }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,6 +72,23 @@ export function Navbar({ activeSection }: NavbarProps) {
               {item.label}
             </motion.button>
           ))}
+
+          {/* Theme Toggle */}
+          {mounted && (
+            <motion.button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-yellow-400" />
+              ) : (
+                <Moon className="w-5 h-5 text-slate-600" />
+              )}
+            </motion.button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -100,6 +124,29 @@ export function Navbar({ activeSection }: NavbarProps) {
               {item.label}
             </motion.button>
           ))}
+          
+          {/* Mobile Theme Toggle */}
+          {mounted && (
+            <motion.button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="px-4 py-3 text-sm font-medium text-left transition-colors border-t border-white/10 flex items-center gap-2 hover:bg-white/5"
+              initial={{ opacity: 0 }}
+              animate={isOpen ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ delay: navItems.length * 0.05 }}
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-4 h-4 text-yellow-400" />
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-4 h-4 text-slate-600" />
+                  <span>Dark Mode</span>
+                </>
+              )}
+            </motion.button>
+          )}
         </div>
       </motion.div>
     </motion.nav>
