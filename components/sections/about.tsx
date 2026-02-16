@@ -2,6 +2,7 @@
 
 import { ScrollReveal } from '@/components/animations/scroll-reveal'
 import { motion } from 'framer-motion'
+import { Code, Database, Box, GitBranch, Server, Palette, Zap, Terminal } from 'lucide-react'
 
 export function About() {
   const containerVariants = {
@@ -23,6 +24,50 @@ export function About() {
       transition: { duration: 0.5 },
     },
   }
+
+  const techStackWithIcons = [
+    {
+      category: 'Languages',
+      skills: [
+        { name: 'PHP', icon: Code },
+        { name: 'JavaScript', icon: Code },
+        { name: 'TypeScript', icon: Code },
+        { name: 'HTML', icon: Code },
+        { name: 'CSS', icon: Palette },
+        { name: 'SQL', icon: Database },
+        { name: 'Java', icon: Code },
+        { name: 'C#', icon: Code },
+      ],
+    },
+    {
+      category: 'Backend',
+      skills: [
+        { name: 'Laravel 12', icon: Server },
+        { name: 'Inertia.js', icon: Zap },
+        { name: 'MySQL', icon: Database },
+        { name: 'Redis', icon: Database },
+      ],
+    },
+    {
+      category: 'Frontend',
+      skills: [
+        { name: 'React 18', icon: Zap },
+        { name: 'Tailwind CSS', icon: Palette },
+        { name: 'shadcn/ui', icon: Palette },
+        { name: 'Radix UI', icon: Palette },
+      ],
+    },
+    {
+      category: 'DevOps & Tools',
+      skills: [
+        { name: 'Docker', icon: Box },
+        { name: 'GitHub Actions', icon: GitBranch },
+        { name: 'Laravel Forge', icon: Server },
+        { name: 'Git', icon: GitBranch },
+        { name: 'VS Code', icon: Terminal },
+      ],
+    },
+  ]
 
   return (
     <section id="about" className="py-20 md:py-32 px-4 relative">
@@ -88,40 +133,28 @@ export function About() {
               viewport={{ once: true }}
               className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
             >
-              {[
-                {
-                  category: 'Languages',
-                  skills: ['PHP', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'SQL', 'Java', 'C#'],
-                },
-                {
-                  category: 'Backend',
-                  skills: ['Laravel 12', 'Inertia.js', 'MySQL', 'Redis'],
-                },
-                {
-                  category: 'Frontend',
-                  skills: ['React 18', 'Tailwind CSS', 'shadcn/ui', 'Radix UI'],
-                },
-                {
-                  category: 'DevOps & Tools',
-                  skills: ['Docker', 'GitHub Actions', 'Laravel Forge', 'Git', 'VS Code'],
-                },
-              ].map((stack, index) => (
+              {techStackWithIcons.map((stack, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
                   className="p-6 rounded-lg glass-morphism hover:bg-white/15 transition-all duration-300"
                   whileHover={{ y: -5 }}
                 >
-                  <h4 className="text-lg font-semibold text-primary mb-4">{stack.category}</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {stack.skills.map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="px-3 py-1 rounded-full text-xs bg-white/10 text-foreground font-medium hover:bg-white/20 transition-colors"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                  <h4 className="text-lg font-semibold text-primary mb-6">{stack.category}</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    {stack.skills.map((skill, skillIndex) => {
+                      const IconComponent = skill.icon
+                      return (
+                        <motion.div
+                          key={skillIndex}
+                          className="flex flex-col items-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          <IconComponent className="w-5 h-5 text-primary" />
+                          <span className="text-xs text-center text-foreground font-medium">{skill.name}</span>
+                        </motion.div>
+                      )
+                    })}
                   </div>
                 </motion.div>
               ))}
