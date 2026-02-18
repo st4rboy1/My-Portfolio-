@@ -1,24 +1,50 @@
 'use client'
 
 import React from "react"
-
+import emailjs from '@emailjs/browser'
 import { ScrollReveal } from '@/components/animations/scroll-reveal'
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, Twitter } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Initialize EmailJS with your public key
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '')
+  }, [])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the data to a backend
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
+    setLoading(true)
+    setError('')
+
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: 'masangcaykyle11@gmail.com',
+        }
+      )
+      setSubmitted(true)
       setFormData({ name: '', email: '', message: '' })
-    }, 3000)
+      setTimeout(() => {
+        setSubmitted(false)
+      }, 3000)
+    } catch (err) {
+      setError('Failed to send message. Please try again.')
+      console.error('EmailJS error:', err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const socialLinks = [
@@ -96,12 +122,19 @@ export function Contact() {
 
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
+                disabled={loading}
+                whileHover={{ scale: !loading ? 1.05 : 1 }}
+                whileTap={{ scale: !loading ? 0.95 : 1 }}
+                className="w-full px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {submitted ? 'Message Sent! ✨' : 'Send Message'}
+                {loading ? 'Sending...' : submitted ? 'Message Sent! ✨' : 'Send Message'}
               </motion.button>
+
+              {error && (
+                <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                  {error}
+                </div>
+              )}
             </motion.form>
           </ScrollReveal>
 
