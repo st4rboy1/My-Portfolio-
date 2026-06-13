@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { ScrollReveal } from '@/components/animations/scroll-reveal'
 import { motion } from 'framer-motion'
 import { ExternalLink, Github, ChevronRight } from 'lucide-react'
@@ -21,7 +22,7 @@ interface Project {
   image: string
   github: string
   live: string
-  badge: string
+  badge?: string
   isPartOfCapstone?: boolean
   isFeatured?: boolean
 }
@@ -48,7 +49,7 @@ const projects: Project[] = [
       '4 security tools in CI/CD pipeline',
     ],
     tags: ['React 18', 'TypeScript', 'Node.js', 'Express.js', 'PostgreSQL', 'Prisma ORM', 'Docker', 'GitHub Actions', 'Playwright', 'k6'],
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop&q=80',
+    image: '/projects/material-management-system.jpg',
     github: GITHUB_REPO,
     live: '',
     badge: 'Solo Internship Project',
@@ -73,7 +74,7 @@ const projects: Project[] = [
       '163 test files, Pest PHP + PHPStan/Larastan',
     ],
     tags: ['Laravel 12', 'React 18', 'Inertia.js', 'TypeScript', 'Tailwind CSS', 'MySQL', 'Docker'],
-    image: 'https://images.unsplash.com/photo-1460925895917-adf4198c868f?w=800&h=500&fit=crop&q=80',
+    image: '/projects/enrollment-system.jpg',
     github: GITHUB_REPO,
     live: '',
     badge: 'Capstone Project',
@@ -88,9 +89,9 @@ const projects: Project[] = [
     myRole:
       'Developed the website structure, responsive sections, and content presentation to keep the experience clear across desktop and mobile.',
     tags: ['Website Design', 'Responsive UI', 'Frontend Development'],
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=500&fit=crop&q=80',
+    image: '/projects/trustabro-website.jpg',
     github: 'https://github.com/st4rboy1/TrustABro-Website',
-    live: '',
+    live: 'https://trust-a-bro-website.vercel.app/#how-it-works',
     badge: 'Website Project',
     isFeatured: true,
   },
@@ -103,9 +104,9 @@ const projects: Project[] = [
     myRole:
       'Built the front-facing website experience with attention to structure, readability, and responsive behavior.',
     tags: ['Website Design', 'Accessibility', 'Responsive UI'],
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=500&fit=crop&q=80',
+    image: '/projects/digital-equity-website.jpg',
     github: 'https://github.com/st4rboy1/Digital-Equity-Website',
-    live: '',
+    live: 'https://digital-equity-two.vercel.app/',
     badge: 'Website Project',
     isFeatured: true,
   },
@@ -235,10 +236,12 @@ export function Projects() {
               <div className="md:grid md:grid-cols-2 md:min-h-[340px]">
                 {/* Image */}
                 <div className="relative h-56 md:h-auto overflow-hidden">
-                  <img
+                  <Image
                     src={project.image}
-                    alt="Abstract visualization representing a web application dashboard"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    alt={`${project.title} screenshot`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/30 hidden md:block" />
                 </div>
@@ -369,12 +372,12 @@ export function Projects() {
 
               <div className="space-y-6">
                 {/* Project Image */}
-                <div className="rounded-lg overflow-hidden h-64">
-                  <img
+                <div className="rounded-lg overflow-hidden h-64 relative">
+                  <Image
                     src={selectedProject.image}
-                    alt=""
-                    aria-hidden="true"
-                    className="w-full h-full object-cover"
+                    alt={`${selectedProject.title} screenshot`}
+                    fill
+                    className="object-cover"
                   />
                 </div>
 
